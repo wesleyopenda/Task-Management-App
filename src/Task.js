@@ -1,6 +1,7 @@
 import { useState } from "react";
+import './task.scss';
 import { Button, Space, Input } from 'antd';
-import { CaretRightFilled, CaretLeftFilled } from '@ant-design/icons';
+import { CaretRightFilled, CaretLeftFilled, CloseOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input; //to allow usage of the "TextArea" tag.
 
@@ -72,10 +73,10 @@ export default function Task(props) {
   return (
     <div className={`task ${collapsed ? "collapsedTask" : ""}`}>
         <Space wrap>
-            <Button onClick={handleMoveLeft} className="button moveTask" type="primary"><CaretLeftFilled /></Button>
+            <Button onClick={handleMoveLeft} type="primary"><CaretLeftFilled /></Button>
         </Space>
-      <form onSubmit={handleSubmit} className={collapsed ? "collapsed" : ""}>
-        <Input 
+      <form onSubmit={handleSubmit} className={collapsed ? "collapsed" : ""} >
+        <Input
           type="text"
           className="title input"
           name="title"
@@ -91,7 +92,7 @@ export default function Task(props) {
           placeholder="Enter Description"
           defaultValue={task.description}
         />
-        <div>
+        <div className="urgencyLabels">
           <label className={`low ${urgencyLevel === "low" ? "selected" : ""}`}>
             <Input
               urgency="low"
@@ -101,10 +102,8 @@ export default function Task(props) {
             />
             low
           </label>
-          <label
-            className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}
-          >
-            <input
+          <label className={`medium ${urgencyLevel === "medium" ? "selected" : ""}`}>
+            <Input
               urgency="medium"
               onChange={setUrgency}
               type="radio"
@@ -112,10 +111,8 @@ export default function Task(props) {
             />
             medium
           </label>
-          <label
-            className={`high ${urgencyLevel === "high" ? "selected" : ""}`}
-          >
-            <input
+          <label className={`high ${urgencyLevel === "high" ? "selected" : ""}`}>
+            <Input
               urgency="high"
               onChange={setUrgency}
               type="radio"
@@ -127,18 +124,10 @@ export default function Task(props) {
   
         <button type="primary" onClick={() => {setFormAction("save");}}>{collapsed ? "Edit" : "Save"}</button>
         {collapsed && (
-          <button
-            onClick={() => {
-              setFormAction("delete");
-            }}
-            className="button delete"
-          >
-            X
-          </button>
-        )}
+        <button type="primary" onClick={() => {setFormAction("delete");}}><CloseOutlined /></button>)}
       </form>
         <Space wrap>
-            <Button onClick={handleMoveRight} className="button moveTask" type="primary"><CaretRightFilled /></Button>
+            <Button onClick={handleMoveRight} type="primary"><CaretRightFilled /></Button>
         </Space>
     </div>
   );

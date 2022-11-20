@@ -86,7 +86,7 @@ function App() {
   }
   return (
     <div className='App'>
-      <h1 className='App-header'>Task Management App</h1>
+      <h1>Task Management App</h1>
       <main>
         <Row>
           <Col span={8}>
